@@ -1,0 +1,66 @@
+site_name: jambonz Python SDK
+site_description: Python SDK for the jambonz CPaaS platform
+repo_url: https://github.com/JavierSanchezCastro/jambonz-sdk
+
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: deep purple
+      accent: pink
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: deep purple
+      accent: pink
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - content.code.copy
+    - content.code.annotate
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          paths: [src]
+          options:
+            show_source: false
+            show_root_heading: true
+            heading_level: 3
+            members_order: source
+            docstring_style: google
+
+markdown_extensions:
+  - admonition
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.details
+  - attr_list
+  - md_in_html
+  - toc:
+      permalink: true
+
+nav:
+  - Home: index.md
+  - Getting Started:
+    - Installation: getting-started/installation.md
+    - Quick Start: getting-started/quickstart.md
+  - Guides:
+    - REST Client: guides/rest-client.md
+    - Webhook Response: guides/webhooks.md
+    - Framework Integration: guides/frameworks.md
+  - API Reference:
+    - Client: api-reference/client.md
+    - Verbs: api-reference/verbs.md
+    - Models: api-reference/models.md
+    - Exceptions: api-reference/exceptions.md

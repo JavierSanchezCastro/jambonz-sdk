@@ -1,0 +1,53 @@
+[project]
+name = "jambonz-sdk"
+version = "0.1.1"
+description = "Python SDK for the jambonz CPaaS platform"
+readme = "README.md"
+license = "MIT"
+authors = [
+    { name = "Javier Sánchez", email = "javsanchezcas@gmail.com" }
+]
+requires-python = ">=3.10"
+keywords = ["jambonz", "voip", "sip", "cpaas", "telephony", "sdk"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Communications :: Telephony",
+    "Typing :: Typed",
+]
+dependencies = [
+    "httpx>=0.28.1",
+    "pydantic>=2.12.5",
+    "pydantic-settings>=2.13.1",
+]
+
+[project.urls]
+Homepage = "https://github.com/JavierSanchezCastro/jambonz-sdk"
+Documentation = "https://javiersanchezcastro.github.io/jambonz-sdk"
+Repository = "https://github.com/JavierSanchezCastro/jambonz-sdk"
+Issues = "https://github.com/JavierSanchezCastro/jambonz-sdk/issues"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/jambonz"]
+
+[dependency-groups]
+dev = [
+    "fastapi>=0.135.3",
+    "mkdocs-material>=9.7.6",
+    "mkdocstrings>=1.0.3",
+    "mkdocstrings-python>=2.0.3",
+    "pytest>=9.0.2",
+    "pytest-asyncio>=1.3.0",
+    "respx>=0.22.0",
+    "uvicorn>=0.44.0",
+]
