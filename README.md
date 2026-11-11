@@ -71,6 +71,15 @@ def handle_speech(result: GatherResult) -> JambonzResponse:
     ]
 ```
 
+## Type checking
+
+Optional verb fields are typed `T | MISSING` (pydantic's PEP 661 sentinel), so a
+type checker rejects `Say(text=None)` and makes you narrow `say.loop is not MISSING`.
+That needs a checker with sentinel support:
+
+- **mypy >= 2.4** (older versions treat `MISSING` as `Any` and silently accept `None`)
+- pyright 1.1.414 (via basedpyright 1.40.2) was checked against the typing test cases and works
+
 ## Features
 
 - **REST API client** with sync and async support

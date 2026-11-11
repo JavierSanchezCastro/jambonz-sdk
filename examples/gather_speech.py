@@ -3,12 +3,12 @@ from fastapi import FastAPI
 
 from jambonz import (
     CallWebhook,
-    GatherResult,
-    JambonzResponse,
-    Say,
     Gather,
+    GatherResult,
     Hangup,
-    Input,
+    JambonzResponse,
+    Recognizer,
+    Say,
 )
 
 app = FastAPI()
@@ -18,8 +18,15 @@ app = FastAPI()
 def handle_call(call: CallWebhook) -> JambonzResponse:
     print(f"Call from {call.from_} to {call.to}")
     return [
-        Say(text="Please say something and I will repeat it back to you."),
-        Gather(input=[Input.SPEECH], action_hook="/gather-result", timeout=10),
+        Gather(
+            input=["speech"],
+            action_hook="/gather-result",
+            timeout=10,
+            recognizer=Recognizer(vendor="deepgram", language="en-US"),
+            say=Say(text="Please say something and I will repeat it back to you."),
+        ),
+        Say(text="I didn't hear anything. Goodbye!"),
+        Hangup(),
     ]
 
 
