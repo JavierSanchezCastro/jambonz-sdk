@@ -1,5 +1,5 @@
 from jambonz.models.accounts import User
-from jambonz.resources._base import SyncResource, AsyncResource
+from jambonz.resources._base import AsyncResource, SyncResource
 
 
 class Users(SyncResource[User]):

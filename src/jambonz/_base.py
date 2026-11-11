@@ -1,9 +1,11 @@
 from __future__ import annotations
 
 import time
-from typing import Any, Callable, Self
+from collections.abc import Callable
+from typing import Any
 
 import httpx
+from typing_extensions import Self
 
 from jambonz.config import JambonzSettings
 from jambonz.exceptions import JambonzRateLimitError, raise_for_status
@@ -20,7 +22,7 @@ class BaseClient:
         on_request: Callable[[httpx.Request], None] | None = None,
         on_response: Callable[[httpx.Response], None] | None = None,
     ):
-        kwargs: dict = {}
+        kwargs: dict[str, Any] = {}
         if account_sid is not None:
             kwargs["account_sid"] = account_sid
         if api_key is not None:
@@ -64,14 +66,18 @@ class BaseClient:
             except JambonzRateLimitError as e:
                 last_exc = e
                 if attempt < self.max_retries:
-                    retry_after = float(e.response.headers.get("Retry-After", 2 ** attempt)) if e.response else 2 ** attempt
+                    retry_after = (
+                        float(e.response.headers.get("Retry-After", 2**attempt))
+                        if e.response
+                        else 2**attempt
+                    )
                     time.sleep(retry_after)
                 else:
                     raise
             except JambonzAPIError as e:
                 if e.status_code >= 500 and attempt < self.max_retries:
                     last_exc = e
-                    time.sleep(2 ** attempt)
+                    time.sleep(2**attempt)
                 else:
                     raise
         raise last_exc  # type: ignore[misc]
@@ -109,7 +115,7 @@ class AsyncBaseClient:
         on_request: Callable[[httpx.Request], None] | None = None,
         on_response: Callable[[httpx.Response], None] | None = None,
     ):
-        kwargs: dict = {}
+        kwargs: dict[str, Any] = {}
         if account_sid is not None:
             kwargs["account_sid"] = account_sid
         if api_key is not None:
@@ -153,14 +159,18 @@ class AsyncBaseClient:
             except JambonzRateLimitError as e:
                 last_exc = e
                 if attempt < self.max_retries:
-                    retry_after = float(e.response.headers.get("Retry-After", 2 ** attempt)) if e.response else 2 ** attempt
+                    retry_after = (
+                        float(e.response.headers.get("Retry-After", 2**attempt))
+                        if e.response
+                        else 2**attempt
+                    )
                     await asyncio.sleep(retry_after)
                 else:
                     raise
             except JambonzAPIError as e:
                 if e.status_code >= 500 and attempt < self.max_retries:
                     last_exc = e
-                    await asyncio.sleep(2 ** attempt)
+                    await asyncio.sleep(2**attempt)
                 else:
                     raise
         raise last_exc  # type: ignore[misc]

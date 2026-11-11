@@ -1,19 +1,19 @@
+from collections.abc import Callable
 from functools import cached_property
-from typing import Callable
 
 import httpx
 
-from jambonz._base import BaseClient, AsyncBaseClient
+from jambonz._base import AsyncBaseClient, BaseClient
 from jambonz.resources.accounts import Accounts, AsyncAccounts
 from jambonz.resources.api_keys import ApiKeys, AsyncApiKeys
 from jambonz.resources.applications import Applications, AsyncApplications
-from jambonz.resources.calls import Calls, AsyncCalls
-from jambonz.resources.recent_calls import RecentCalls, AsyncRecentCalls
-from jambonz.resources.carriers import Carriers, AsyncCarriers
-from jambonz.resources.gateways import Gateways, AsyncGateways
-from jambonz.resources.phone_numbers import PhoneNumbers, AsyncPhoneNumbers
-from jambonz.resources.speech_services import SpeechServices, AsyncSpeechServices
-from jambonz.resources.users import Users, AsyncUsers
+from jambonz.resources.calls import AsyncCalls, Calls
+from jambonz.resources.carriers import AsyncCarriers, Carriers
+from jambonz.resources.gateways import AsyncGateways, Gateways
+from jambonz.resources.phone_numbers import AsyncPhoneNumbers, PhoneNumbers
+from jambonz.resources.recent_calls import AsyncRecentCalls, RecentCalls
+from jambonz.resources.speech_services import AsyncSpeechServices, SpeechServices
+from jambonz.resources.users import AsyncUsers, Users
 
 
 class JambonzClient(BaseClient):

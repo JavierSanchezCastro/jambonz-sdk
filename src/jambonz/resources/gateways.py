@@ -1,5 +1,5 @@
 from jambonz.models.carriers import SipGateway
-from jambonz.resources._base import SyncResource, AsyncResource
+from jambonz.resources._base import AsyncResource, SyncResource
 
 
 class Gateways(SyncResource[SipGateway]):

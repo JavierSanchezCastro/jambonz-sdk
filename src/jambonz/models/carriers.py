@@ -11,6 +11,7 @@ class TrunkType(str, Enum):
 
 class Carrier(_JambonzModel):
     """https://docs.jambonz.org/reference/rest-platform-management/carriers/list-voip-carriers"""
+
     service_provider_sid: Sid | None = None
     name: str = ""
     description: str | None = None
@@ -37,6 +38,7 @@ class Carrier(_JambonzModel):
 
 class SipGateway(_JambonzModel):
     """https://docs.jambonz.org/reference/rest-platform-management/sip-gateways/list-sip-gateways"""
+
     sip_gateway_sid: Sid | None = None
     ipv4: str | None = None
     port: int = 5060

@@ -3,6 +3,7 @@ from jambonz.models._base import Sid, _JambonzModel
 
 class SpeechService(_JambonzModel):
     """https://docs.jambonz.org/reference/rest-platform-management/speech-credentials/list-speech-credentials"""
+
     speech_credential_sid: Sid | None = None
     account_sid: Sid | None = None
     vendor: str = ""
