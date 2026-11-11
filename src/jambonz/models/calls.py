@@ -6,8 +6,16 @@ from jambonz.models._base import Sid, _JambonzModel
 
 
 class CallStatus(str, Enum):
+    """Call status in REST responses (closed ``Enum``).
+
+    Hook payloads type the same field as the open ``Literal``
+    ``jambonz.CallStatusValue`` instead. Both include ``early-media``;
+    ``ALERTING`` is kept for compatibility with earlier releases.
+    """
+
     TRYING = "trying"
     RINGING = "ringing"
+    EARLY_MEDIA = "early-media"
     ALERTING = "alerting"
     IN_PROGRESS = "in-progress"
     COMPLETED = "completed"
@@ -24,6 +32,7 @@ class Direction(str, Enum):
 
 class Call(_JambonzModel):
     """https://docs.jambonz.org/reference/rest-call-control/calls/list-calls"""
+
     account_sid: Sid | None = None
     call_id: str | None = None
     call_sid: Sid | None = None
@@ -44,6 +53,7 @@ class Call(_JambonzModel):
 
 class RecentCall(_JambonzModel):
     """https://docs.jambonz.org/reference/rest-platform-management/recent-calls/list-recent-calls"""
+
     call_sid: Sid | None = None
     account_sid: Sid | None = None
     from_: str | None = Field(None, alias="from")
@@ -66,6 +76,7 @@ class RecentCall(_JambonzModel):
 
 class CallTarget(_JambonzModel):
     """Target for dialing: phone number, SIP URI, user, or teams."""
+
     type: str
     number: str | None = None
     sip_uri: str | None = Field(None, alias="sipUri")

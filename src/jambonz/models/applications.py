@@ -5,6 +5,7 @@ from jambonz.models._base import Sid, Webhook, _JambonzModel
 
 class Application(_JambonzModel):
     """https://docs.jambonz.org/reference/rest-platform-management/applications/list-applications"""
+
     name: str = ""
     application_sid: Sid | None = None
     account_sid: Sid | None = None

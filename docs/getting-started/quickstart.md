@@ -92,14 +92,14 @@ def handle_gather(result: GatherResult) -> JambonzResponse:
 Connect to an ElevenLabs agent:
 
 ```python
-from jambonz import CallWebhook, LLMResult, JambonzResponse, LLM, LLMAuth
+from jambonz import CallWebhook, LLMResult, JambonzResponse, LLM
 
 @app.post("/jambonz-call")
 def handle_call(call: CallWebhook) -> JambonzResponse:
     return [
         LLM(
             vendor="elevenlabs",
-            auth=LLMAuth(agent_id="your-agent-id"),
+            auth={"agent_id": "your-agent-id"},
             llm_options={},
             action_hook="/llm-complete",
         ),

@@ -1,5 +1,5 @@
 from jambonz.models.speech_services import SpeechService
-from jambonz.resources._base import SyncResource, AsyncResource
+from jambonz.resources._base import AsyncResource, SyncResource
 
 
 class SpeechServices(SyncResource[SpeechService]):

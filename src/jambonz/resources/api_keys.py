@@ -1,5 +1,5 @@
 from jambonz.models.accounts import ApiKey
-from jambonz.resources._base import SyncResource, AsyncResource
+from jambonz.resources._base import AsyncResource, SyncResource
 
 
 class ApiKeys(SyncResource[ApiKey]):

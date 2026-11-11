@@ -1,6 +1,6 @@
 [project]
 name = "jambonz-sdk"
-version = "0.1.1"
+version = "0.2.0"
 description = "Python SDK for the jambonz CPaaS platform"
 readme = "README.md"
 license = "MIT"
@@ -23,7 +23,8 @@ classifiers = [
 ]
 dependencies = [
     "httpx>=0.28.1",
-    "pydantic>=2.12.5",
+    "pydantic>=2.14",
+    "typing-extensions>=4.12",
     "pydantic-settings>=2.13.1",
 ]
 
@@ -43,11 +44,37 @@ packages = ["src/jambonz"]
 [dependency-groups]
 dev = [
     "fastapi>=0.135.3",
+    "mypy>=2.4",
     "mkdocs-material>=9.7.6",
     "mkdocstrings>=1.0.3",
     "mkdocstrings-python>=2.0.3",
     "pytest>=9.0.2",
     "pytest-asyncio>=1.3.0",
     "respx>=0.22.0",
+    "ruff>=0.11",
     "uvicorn>=0.44.0",
 ]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100
+extend-exclude = ["playground"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.ruff.lint.per-file-ignores]
+# Legacy REST client and its tests; long lines left as they were.
+"src/jambonz/_base.py" = ["E501"]
+"src/jambonz/resources/*" = ["E501"]
+"tests/test_client.py" = ["E501"]
+
+[tool.mypy]
+python_version = "3.10"
+strict = true
+warn_unused_ignores = true
+
+[[tool.mypy.overrides]]
+# Legacy REST client: Calls.create narrows the generic **data signature on purpose.
+module = ["jambonz.resources.calls"]
+disable_error_code = ["override"]

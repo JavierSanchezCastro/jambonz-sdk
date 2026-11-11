@@ -1,8 +1,11 @@
+from typing import Any
+
 from jambonz.models._base import Sid, Webhook, _JambonzModel
 
 
 class Account(_JambonzModel):
     """https://docs.jambonz.org/reference/rest-platform-management/accounts/list-accounts"""
+
     account_sid: Sid | None = None
     name: str | None = None
     sip_realm: str | None = None
@@ -11,11 +14,12 @@ class Account(_JambonzModel):
     service_provider_sid: Sid | None = None
     record_all_calls: bool = False
     record_format: str | None = None
-    bucket_credential: dict | None = None
+    bucket_credential: dict[str, Any] | None = None
 
 
 class ApiKey(_JambonzModel):
     """https://docs.jambonz.org/reference/rest-platform-management/api-keys/list-api-keys"""
+
     api_key_sid: Sid | None = None
     token: str | None = None
     account_sid: Sid | None = None
@@ -27,6 +31,7 @@ class ApiKey(_JambonzModel):
 
 class User(_JambonzModel):
     """https://docs.jambonz.org/reference/rest-platform-management/users/create-user"""
+
     user_sid: Sid | None = None
     name: str | None = None
     email: str | None = None

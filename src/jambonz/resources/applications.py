@@ -1,5 +1,5 @@
 from jambonz.models.applications import Application
-from jambonz.resources._base import SyncResource, AsyncResource
+from jambonz.resources._base import AsyncResource, SyncResource
 
 
 class Applications(SyncResource[Application]):

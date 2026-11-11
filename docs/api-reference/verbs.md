@@ -2,46 +2,46 @@
 
 ## Response
 
-::: jambonz.webhook.response.JambonzResponse
+::: jambonz.verbs.to_json
 
 ## Outgoing verbs
 
-::: jambonz.webhook.verbs.Say
+::: jambonz.verbs.Say
 
-::: jambonz.webhook.verbs.Play
+::: jambonz.verbs.Play
 
-::: jambonz.webhook.verbs.Gather
+::: jambonz.verbs.Gather
 
-::: jambonz.webhook.verbs.Pause
+::: jambonz.verbs.Pause
 
-::: jambonz.webhook.verbs.Hangup
+::: jambonz.verbs.Hangup
 
-::: jambonz.webhook.verbs.Redirect
+::: jambonz.verbs.Redirect
 
-::: jambonz.webhook.verbs.LLM
+::: jambonz.verbs.LLM
 
-::: jambonz.webhook.verbs.Dial
+::: jambonz.verbs.Dial
 
 ## Incoming webhooks
 
-::: jambonz.webhook.incoming.CallWebhook
+::: jambonz.payloads.CallWebhook
 
-::: jambonz.webhook.incoming.CallStatusEvent
+::: jambonz.payloads.CallStatusEvent
 
-::: jambonz.webhook.incoming.GatherResult
+::: jambonz.payloads.GatherResult
 
-::: jambonz.webhook.incoming.DialResult
+::: jambonz.payloads.DialResult
 
-::: jambonz.webhook.incoming.LLMResult
+::: jambonz.payloads.LLMResult
 
-::: jambonz.webhook.incoming.ToolCall
+::: jambonz.payloads.ToolCall
 
-::: jambonz.webhook.incoming.ToolResult
+::: jambonz.payloads.ToolResult
 
 ## Shared types
 
-::: jambonz.webhook.verbs.Synthesizer
+::: jambonz.verbs.Synthesizer
 
-::: jambonz.webhook.verbs.Recognizer
+::: jambonz.verbs.Recognizer
 
-::: jambonz.webhook.verbs.Input
+::: jambonz.verbs.Input

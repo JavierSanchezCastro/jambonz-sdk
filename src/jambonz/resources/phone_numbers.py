@@ -1,5 +1,5 @@
 from jambonz.models.phone_numbers import PhoneNumber
-from jambonz.resources._base import SyncResource, AsyncResource
+from jambonz.resources._base import AsyncResource, SyncResource
 
 
 class PhoneNumbers(SyncResource[PhoneNumber]):

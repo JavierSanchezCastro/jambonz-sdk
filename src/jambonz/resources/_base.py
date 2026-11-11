@@ -2,7 +2,7 @@ from typing import Any, Generic, TypeVar
 
 from pydantic import BaseModel
 
-from jambonz._base import BaseClient, AsyncBaseClient
+from jambonz._base import AsyncBaseClient, BaseClient
 
 T = TypeVar("T", bound=BaseModel)
 

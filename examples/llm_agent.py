@@ -4,13 +4,12 @@ import os
 from fastapi import FastAPI
 
 from jambonz import (
+    LLM,
     CallWebhook,
+    JambonzResponse,
     LLMResult,
     ToolCall,
     ToolResult,
-    JambonzResponse,
-    LLM,
-    LLMAuth,
 )
 
 app = FastAPI()
@@ -24,7 +23,7 @@ def handle_call(call: CallWebhook) -> JambonzResponse:
     return [
         LLM(
             vendor="elevenlabs",
-            auth=LLMAuth(agent_id=AGENT_ID),
+            auth={"agent_id": AGENT_ID},  # vendor keys go out exactly as written
             llm_options={},
             action_hook="/llm-complete",
             tool_hook="/tool-call",
@@ -33,14 +32,11 @@ def handle_call(call: CallWebhook) -> JambonzResponse:
 
 
 @app.post("/llm-complete")
-def handle_llm_complete(result: LLMResult):
+def handle_llm_complete(result: LLMResult) -> None:
     print(f"LLM session ended: {result.completion_reason}")
 
 
 @app.post("/tool-call")
 def handle_tool(tool: ToolCall) -> ToolResult:
     print(f"Tool call: {tool.name}({tool.args})")
-    return ToolResult(
-        tool_call_id=tool.tool_call_id,
-        result="Tool executed successfully.",
-    )
+    return ToolResult(result="Tool executed successfully.")

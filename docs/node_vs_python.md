@@ -58,15 +58,15 @@ Respond to jambonz HTTP webhook requests with verb instructions.
 
 | Feature | Node.js | Python |
 |---|---|---|
-| Class | `WebhookResponse` | `JambonzResponse` (Pydantic RootModel) |
+| Class | `WebhookResponse` | `JambonzResponse` (alias of `Sequence[Verb]`) |
 | Style | Method chaining: `.say().hangup()` | List: `[Say(...), Hangup()]` |
 | Verb validation | ✅ (`@jambonz/verb-specifications`) | ✅ (Pydantic model validation) |
 | Verb auto-generation | ✅ (dynamic from specs) | ❌ (manually defined) |
 | camelCase aliases | ❌ (manual) | ✅ (`alias_generator=to_camel`) |
-| Null exclusion | ❌ (manual) | ✅ (`model_serializer`) |
+| Null exclusion | ❌ (manual) | ✅ (unset fields are `MISSING` and never dumped) |
 | Discriminated union type | ❌ | ✅ (`Verb` with discriminator) |
 | Typed enums | ❌ | ✅ (`Input.SPEECH`) |
-| Framework agnostic | ✅ (`toJSON()`) | ✅ (`model_dump()` / `model_dump_json()`) |
+| Framework agnostic | ✅ (`toJSON()`) | ✅ (`to_json()`) |
 | FastAPI native | N/A | ✅ (`response_model` / `->` type hint) |
 | Webhook signature verification | ✅ (HMAC-SHA256, timing-safe) | ❌ |
 

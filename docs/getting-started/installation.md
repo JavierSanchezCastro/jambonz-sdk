@@ -3,6 +3,7 @@
 ## Requirements
 
 - Python 3.10+
+- For static typing of verbs: mypy >= 2.4 (see [Type checking](#type-checking))
 - A jambonz account ([jambonz.cloud](https://jambonz.cloud) or self-hosted)
 
 ## Install
@@ -24,6 +25,15 @@
     ```bash
     poetry add jambonz-sdk
     ```
+
+## Type checking
+
+Optional verb fields are typed `T | MISSING` (pydantic's PEP 661 sentinel), so a
+type checker rejects `Say(text=None)` and makes you narrow `say.loop is not MISSING`.
+That needs a checker with sentinel support:
+
+- **mypy >= 2.4** (older versions treat `MISSING` as `Any` and silently accept `None`)
+- pyright 1.1.414 (via basedpyright 1.40.2) was checked against the typing test cases and works
 
 ## Configuration
 

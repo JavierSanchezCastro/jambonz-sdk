@@ -1,23 +1,20 @@
 """Same simple greeting but using Flask instead of FastAPI."""
-from flask import Flask, request
+from flask import Flask, Response, request
 
-from jambonz import JambonzResponse, Say, Pause, Hangup
+from jambonz import CallWebhook, Hangup, Pause, Say, to_json
 
 app = Flask(__name__)
 
 
 @app.post("/jambonz-call")
-def handle_call():
-    data = request.get_json()
-    print(f"Call from {data.get('from')} to {data.get('to')}")
+def handle_call() -> Response:
+    call = CallWebhook.model_validate(request.get_json())
+    print(f"Call from {call.from_} to {call.to}")
 
-    response = JambonzResponse([
+    body = to_json([
         Say(text="Hello! Welcome to our service."),
-        Pause(length=1.0),
+        Pause(length=1),
         Say(text="Goodbye!"),
         Hangup(),
     ])
-    return app.response_class(
-        response.model_dump_json(),
-        content_type="application/json",
-    )
+    return Response(body, content_type="application/json")

@@ -1,11 +1,12 @@
 from typing import Any
 
 from jambonz.models.calls import Call
-from jambonz.resources._base import SyncResource, AsyncResource
+from jambonz.resources._base import AsyncResource, SyncResource
 
 
 class Calls(SyncResource[Call]):
     """Call control — active calls."""
+
     _model = Call
     _path = "Accounts/{account_sid}/Calls"
 

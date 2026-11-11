@@ -34,41 +34,33 @@ uvicorn myapp:app --host 127.0.0.1 --port 8000
 
 ## Flask
 
-Construct `JambonzResponse` and serialize manually:
+Serialize the verb list with `to_json`:
 
 ```python
-from flask import Flask, request
-from jambonz import JambonzResponse, Say, Hangup
+from flask import Flask, Response
+from jambonz import Say, Hangup, to_json
 
 app = Flask(__name__)
 
 @app.post("/jambonz-call")
 def handle_call():
-    response = JambonzResponse([Say(text="Hello!"), Hangup()])
-    return app.response_class(
-        response.model_dump_json(),
-        content_type="application/json",
-    )
+    return Response(to_json([Say(text="Hello!"), Hangup()]), content_type="application/json")
 ```
 
 ## Django
 
 ```python
 from django.http import HttpResponse
-from jambonz import JambonzResponse, Say, Hangup
+from jambonz import Say, Hangup, to_json
 
 def handle_call(request):
-    response = JambonzResponse([Say(text="Hello!"), Hangup()])
-    return HttpResponse(
-        response.model_dump_json(),
-        content_type="application/json",
-    )
+    return HttpResponse(to_json([Say(text="Hello!"), Hangup()]), content_type="application/json")
 ```
 
 ## Comparison
 
 | | FastAPI | Flask | Django |
 |---|---|---|---|
-| Serialization | Automatic (`-> JambonzResponse`) | `response.model_dump_json()` | `response.model_dump_json()` |
+| Serialization | Automatic (`-> JambonzResponse`) | `to_json(verbs)` | `to_json(verbs)` |
 | Webhook parsing | Automatic (`call: CallWebhook`) | Manual (`request.get_json()`) | Manual (`json.loads(request.body)`) |
 | Async | Native | Via Quart | Via async views |
