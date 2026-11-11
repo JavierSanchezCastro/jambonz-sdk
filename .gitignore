@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+dist/
+build/
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Docs
+site/
+
+# Secrets — never commit
+.env
+.env.*
+!.env.e2e.example
+
+# Softphone recordings
+testing/out/
+.coverage
+htmlcov/
+.idea/
+.vscode/
+.DS_Store
